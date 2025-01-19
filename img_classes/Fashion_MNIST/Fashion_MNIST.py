@@ -1,15 +1,12 @@
 import os
-import sys
 from kaggle.api.kaggle_api_extended import KaggleApi
 import pandas as pd
 from PIL import Image
 import numpy as np
-
-sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-import img_classes.img_interface as img_interface
+from img_classes.img_interface import img_interface
 
 
-class Fashion_MNIST(img_interface.img_interface):
+class Fashion_MNIST(img_interface):
     def __init__(self, path):
         self.test_paths = {}
         self.train_paths = {}

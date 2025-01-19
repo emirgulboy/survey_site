@@ -1,5 +1,4 @@
-import img_classes.Fashion_MNIST as Fashion_MNIST
-import img_classes.interfaces.img_interface as img_interface
+from img_classes.Fashion_MNIST.Fashion_MNIST import Fashion_MNIST
 
 DATA_TYPES = {
     'Fashion-MNIST': Fashion_MNIST
@@ -18,5 +17,5 @@ class image_loader:
 
 
 if __name__ == '__main__':
-    loader = image_loader('data/paths.json')
+    loader = image_loader('data/Fashion_MNIST')
     print(loader.paths)
