@@ -1,0 +1,7 @@
+{
+    "Fashion-MNIST": {
+        "classes": 10,
+        "select_out_of": "4",
+        "data_path": "data/Fashion-MNIST"
+    }
+}

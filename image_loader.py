@@ -17,5 +17,5 @@ class image_loader:
 
 
 if __name__ == '__main__':
-    loader = image_loader('data/Fashion_MNIST')
+    loader = image_loader('data/Fashion-MNIST')
     print(loader.paths)
