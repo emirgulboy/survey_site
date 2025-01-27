@@ -38,11 +38,11 @@ class Fashion_MNIST(img_interface):
         return self.test_paths
 
     def set_up_dir(self, enable_training=False):
-        if not any(file.endswith('.csv') for file in os.listdir('data/mnist')):
-            api = KaggleApi()
-            api.authenticate()
+        # if not any(file.endswith('.csv') for file in os.listdir('data/mnist')):
+            # api = KaggleApi()
+            # api.authenticate()
             # Download the MNIST dataset
-            api.dataset_download_files('zalando-research/fashionmnist', path='data/mnist', unzip=True)
+            # api.dataset_download_files('zalando-research/fashionmnist', path='data/mnist', unzip=True)
 
         # Create directories for each class
         types = ['train', 'test']
