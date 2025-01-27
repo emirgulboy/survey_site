@@ -1,6 +1,9 @@
 import json
 import streamlit as st
-from image_loader import image_loader
+from managers.image_manager import image_loader
+from managers.test_manager import test_manager
+
+
 st.title('A/B Testing')
 
 if "email" not in st.session_state:
@@ -18,6 +21,9 @@ if "settings" not in st.session_state:
     with open('settings.json') as f:
         st.session_state.settings = json.load(f)
 
+if "results" not in st.session_state:
+    st.session_state.results = []
+
 submit_button = False
 
 if not st.session_state.form_submitted:
@@ -30,8 +36,6 @@ if not st.session_state.form_submitted:
 
     if submit_button:
         st.session_state.form_submitted = True
-else:
-    st.write("Thank you for submitting your information!")
 
 if submit_button:
     st.session_state.email = email
@@ -44,12 +48,39 @@ if st.session_state.form_submitted and not st.session_state.dataset:
 
     selected_data = st.selectbox('Select Dataset', st.session_state.settings.keys())
     dataset_selected = st.button('Select Dataset')
-    if dataset_selected:
+    if dataset_selected and selected_data in st.session_state.settings.keys():
         st.session_state.dataset = selected_data
+        testManager = test_manager(st.session_state.settings, selected_data)
+        st.session_state.results = [0 for i in range(st.session_state.settings[selected_data]["test_size"])]
+        st.session_state.test_manager = testManager
+        st.session_state.test = testManager.test
         st.rerun()
-    elif dataset_selected and selected_data in st.session_state.settings.keys():
+    else:
         st.error('Please select a dataset')
 
 if st.session_state.dataset:
     loader = image_loader(st.session_state.settings[st.session_state.dataset]['data_path'], st.session_state.dataset)
-    st.write(loader.paths)
+
+    if "image_index" not in st.session_state:
+        st.session_state.image_index = 0
+
+    if st.session_state.image_index < st.session_state.settings[st.session_state.dataset]["test_size"]:
+        st.image(st.session_state.test[st.session_state.image_index]["image_path"], caption=f"Image {st.session_state.image_index + 1}")
+        answer = st.segmented_control("Select the class of the image", st.session_state.test[st.session_state.image_index]["possible_classes"], selection_mode='single')
+        previous = False
+        if st.session_state.image_index > 0:
+            previous = st.button('Previous Image')
+        button_text = 'Submit' if st.session_state.image_index == st.session_state.settings[st.session_state.dataset]["test_size"] - 1 else 'Next Image'
+        selected = st.button(button_text)
+        if selected:
+            st.session_state.results[st.session_state.image_index] = answer
+            st.session_state.image_index += 1
+            st.rerun()
+        if previous:
+            st.session_state.image_index -= 1
+            st.rerun()
+    else:
+        st.write("Thank you for submitting your information!")
+        st.write("All images have been shown.")
+        results = st.session_state.test_manager.save_result(st.session_state.results)
+        
