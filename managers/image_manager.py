@@ -1,8 +1,9 @@
 import random
 from img_classes.Fashion_MNIST.Fashion_MNIST import Fashion_MNIST
-
+from img_classes.edge_cases import edge_cases
 DATA_TYPES = {
-    'Fashion-MNIST': Fashion_MNIST
+    'Fashion-MNIST': Fashion_MNIST,
+    'NIST-KMNC': edge_cases
 }
 
 

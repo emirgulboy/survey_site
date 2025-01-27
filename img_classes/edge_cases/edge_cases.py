@@ -1,7 +1,7 @@
 from img_classes.img_interface import img_interface
 import os
 import json
-SAVE_PATH = 'img_classes/paths/'
+SAVE_PATH = './img_classes/paths/'
 
 
 class edge_images(img_interface):
