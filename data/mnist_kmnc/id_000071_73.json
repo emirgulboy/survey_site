@@ -1,0 +1,40 @@
+{
+    "__version_entry__": [
+        {
+            "__Tool__": "tummnist_lenet ",
+            "__Version__": "dh_prob_full_testset",
+            "__Time__": "2024-10-18 17:53:34"
+        }
+    ],
+    "__evaluations_metrics__": [
+        {
+            "op_class": 7,
+            "op_class_name": "7",
+            "op_class_prob": 0.78
+        }
+    ],
+    "__ground_truth_metrics__": [
+        {
+            "op_class": 9,
+            "op_class_name": "9",
+            "op_class_prob": 1.0
+        }
+    ],
+    "__image_quality_metrics__": [
+        {
+            "org_image": "73",
+            "SSIM": 0.58,
+            "MSE": 0.07,
+            "l0_norm": 153,
+            "l2_norm": 7.62,
+            "linf_norm": 1.0,
+            "transformations": "transformations-speckle_noise"
+        }
+    ],
+    "__gt_labels__": [
+        {
+            "__gt_class__": 9,
+            "__gt_classname__": "9"
+        }
+    ]
+}
