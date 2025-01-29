@@ -40,7 +40,7 @@ class edge_cases(img_interface):
     def _create_info(self):
         for file in os.listdir(self._path):
             if file.endswith(".json"):
-                file_path = os.path.join(self._path, file)
+                file_path = self._path + "/" + file
                 with open(file_path, 'r') as f:
                     data = json.load(f)
                     true_class = data['__gt_labels__'][0]['__gt_class__']
