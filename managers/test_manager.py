@@ -33,7 +33,7 @@ class test_manager:
             })
         return self._question_list
 
-    def save_result(self, answers):
+    def save_result(self, answers, form):
         self._results = self._question_list.copy()
         for i in range(len(answers)):
             answer = answers[i]
@@ -42,4 +42,4 @@ class test_manager:
                 self._results[i]['correct'] = True
             else:
                 self._results[i]['correct'] = False
-        self._save_manager.save_to_file(self._results)
+        self._save_manager.save_to_db(self._results, form)

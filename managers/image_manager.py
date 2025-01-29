@@ -1,9 +1,9 @@
 import random
 from img_classes.Fashion_MNIST.Fashion_MNIST import Fashion_MNIST
-from img_classes.edge_cases import edge_cases
+from img_classes.edge_cases.edge_cases import edge_cases
 DATA_TYPES = {
     'Fashion-MNIST': Fashion_MNIST,
-    'NIST-KMNC': edge_cases
+    'MNIST-KMNC': edge_cases
 }
 
 
@@ -23,9 +23,9 @@ class image_loader:
         return_list = []
         for _ in range(size):
             random.seed()
-            selected_class_idx = random.randint(0, len(self.paths.keys()))
+            selected_class_idx = random.choice(range(len(self.paths)))
             selected_class = list(self.paths.keys())[selected_class_idx]
-            selected_case_idx = random.randint(0, len(self.paths[selected_class]))
+            selected_case_idx = random.choice(range(len(self.paths[selected_class])))
             selected_case = list(self.paths[selected_class])[selected_case_idx]
             temp_dict = {
                 'class_idx': selected_class_idx,

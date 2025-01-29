@@ -1,6 +1,5 @@
 import json
 import streamlit as st
-from managers.image_manager import image_loader
 from managers.test_manager import test_manager
 
 
@@ -59,7 +58,6 @@ if st.session_state.form_submitted and not st.session_state.dataset:
         st.error('Please select a dataset')
 
 if st.session_state.dataset:
-    loader = image_loader(st.session_state.settings[st.session_state.dataset]['data_path'], st.session_state.dataset)
 
     if "image_index" not in st.session_state:
         st.session_state.image_index = 0
@@ -82,5 +80,5 @@ if st.session_state.dataset:
     else:
         st.write("Thank you for submitting your information!")
         st.write("All images have been shown.")
-        results = st.session_state.test_manager.save_result(st.session_state.results)
-        
+        form = {'email': st.session_state.email, 'age': st.session_state.age}
+        results = st.session_state.test_manager.save_result(st.session_state.results,form)

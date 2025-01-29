@@ -4,7 +4,7 @@ import json
 SAVE_PATH = './img_classes/paths/'
 
 
-class edge_images(img_interface):
+class edge_cases(img_interface):
     def __init__(self, path, data_type='MNIST-KMNC'):
         self.paths = {}
         self._data_type = data_type
@@ -23,6 +23,12 @@ class edge_images(img_interface):
             else:
                 self._read_info()
 
+    def get_classes(self):
+        return list(self.paths.keys())
+
+    def get_paths(self):
+        return self.paths
+
     def _save_info(self):
         with open(os.path.join(SAVE_PATH, self._data_type + '.json'), 'w') as f:
             json.dump(self.paths, f)
@@ -37,8 +43,8 @@ class edge_images(img_interface):
                 file_path = os.path.join(self._path, file)
                 with open(file_path, 'r') as f:
                     data = json.load(f)
-                    true_class = data['__gt_labels__']['__gt_class__']
+                    true_class = data['__gt_labels__'][0]['__gt_class__']
                     if true_class not in self.paths:
-                        self.paths[true_class] = [file_path]
+                        self.paths[true_class] = [file_path.replace('.json', '.png')]
                     else:
-                        self.paths[true_class].append(file_path)
+                        self.paths[true_class].append(file_path.replace('.json', '.png'))

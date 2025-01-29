@@ -1,14 +1,8 @@
 {
-    "Fashion-MNIST": {
-        "classes": 10,
-        "select_out_of": 4,
-        "test_size": 2,
-        "data_path": "./data/Fashion-MNIST"
-    },
     "MNIST-KMNC": {
         "classes": 10,
         "select_out_of": 4,
         "test_size": 2,
-        "data_path": "./data/mnist_kmnc"
+        "data_path": "data/mnist_kmnc"
     }
 }
